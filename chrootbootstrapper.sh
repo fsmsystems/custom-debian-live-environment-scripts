@@ -270,7 +270,7 @@ echo "Setting hostname..."
 echo "$hostname" > "$workdir/chroot/etc/hostname"
 
 echo "Installing live-boot and systemd-sys in chroot..." #TODO: provide other inits
-chroot "$workdir"/chroot /bin/bash -c "apt-get update && apt-get install -y --no-install-recommends live-boot systemd-sysv"
+chroot "$workdir"/chroot /bin/bash -c "apt-get update && apt-get install -y --no-install-recommends live-boot systemd-sysv wireshark awesome vim jmeter"
 
 echo "All done! Remember to install a kernel (and set root password) before running chroot2iso.sh"
 exit 0
