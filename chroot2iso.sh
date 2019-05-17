@@ -227,6 +227,12 @@ menu default
 kernel /live/vmlinuz1
 append initrd=/live/initrd1 boot=live
 
+label awbian-lol
+menu label awbian
+menu default
+kernel /live/vmlinuz1
+append initrd=/live/initrd1 boot=live acpi=off nomodeset noapic toram
+
 label hdt
 menu label ^Hardware Detection Tool (HDT)
 kernel hdt.c32
