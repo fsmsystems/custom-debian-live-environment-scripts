@@ -74,7 +74,7 @@ hostname="debian-live"
 hybrid=false
 installdeps=false
 mirror="http://ftp.us.debian.org/debian/"
-suite="stretch"
+suite="testing"
 variant="minbase"
 workdir=
 
@@ -269,8 +269,25 @@ debootstrap --arch="$arch" --variant="$variant" "$suite" "$workdir"/chroot "$mir
 echo "Setting hostname..."
 echo "$hostname" > "$workdir/chroot/etc/hostname"
 
+mount -o bind /dev  "$workdir"/chroot/dev
+mount -o bind /proc "$workdir"/chroot/proc
+mount -o bind /sys  "$workdir"/chroot/sys
+
+cat <<'EOF' > "$workdir"/chroot/etc/apt/sources.list 
+deb http://deb.debian.org/debian/ testing main contrib non-free
+deb-src http://deb.debian.org/debian/ testing main contrib non-free
+deb http://deb.debian.org/debian/ testing-updates main contrib non-free
+deb-src http://deb.debian.org/debian/ testing-updates main contrib non-free
+EOF
+
 echo "Installing live-boot and systemd-sys in chroot..." #TODO: provide other inits
-chroot "$workdir"/chroot /bin/bash -c "apt-get update && apt-get install -y --no-install-recommends live-boot systemd-sysv wireshark awesome vim jmeter"
+#chroot "$workdir"/chroot /bin/bash -c "apt-get update && apt-get install -y --no-install-recommends live-boot systemd-sysv wireshark awesome vim jmeter"
+chroot "$workdir"/chroot /bin/bash -c "apt-get update && apt-get install -y --no-install-recommends live-boot systemd-sysv wireshark awesome vim jmeter rxvt-unicode firmware-iwlwifi network-manager net-tools wireless-tools wpagui curl openssh-clientxserver-xorg-core xserver-xorg xinit xterm firmware-linux-free firmware-linux-nonfree firmware-atheros firmware-realtek firmware-ralink firmware-iwlwifi ntfs-3g dosfstools memtest86+ live-boot firefox-esr\
+vim jmeter parcellite xscreensaver xserver-xorg-video-intel"
 
 echo "All done! Remember to install a kernel (and set root password) before running chroot2iso.sh"
+umount "$workdir"/chroot/dev
+umount "$workdir"/chroot/proc
+umount "$workdir"/chroot/sys
+
 exit 0
