@@ -282,8 +282,7 @@ EOF
 
 echo "Installing live-boot and systemd-sys in chroot..." #TODO: provide other inits
 #chroot "$workdir"/chroot /bin/bash -c "apt-get update && apt-get install -y --no-install-recommends live-boot systemd-sysv wireshark awesome vim jmeter"
-chroot "$workdir"/chroot /bin/bash -c "apt-get update && apt-get install -y --no-install-recommends live-boot systemd-sysv wireshark awesome vim jmeter rxvt-unicode firmware-iwlwifi network-manager net-tools wireless-tools wpagui curl openssh-clientxserver-xorg-core xserver-xorg xinit xterm firmware-linux-free firmware-linux-nonfree firmware-atheros firmware-realtek firmware-ralink firmware-iwlwifi ntfs-3g dosfstools memtest86+ live-boot firefox-esr\
-vim jmeter parcellite xscreensaver xserver-xorg-video-intel"
+chroot "$workdir"/chroot /bin/bash -c "apt-get update && apt-get install -y --no-install-recommends live-boot systemd-sysv wireshark awesome vim jmeter rxvt-unicode firmware-iwlwifi network-manager net-tools wireless-tools wpagui curl openssh-client xserver-xorg-core xserver-xorg xinit xterm firmware-linux-free firmware-linux-nonfree firmware-atheros firmware-realtek firmware-ralink firmware-iwlwifi ntfs-3g dosfstools memtest86+ live-boot firefox-esr vim jmeter parcellite xscreensaver xserver-xorg-video-intel"
 
 echo "All done! Remember to install a kernel (and set root password) before running chroot2iso.sh"
 umount "$workdir"/chroot/dev
